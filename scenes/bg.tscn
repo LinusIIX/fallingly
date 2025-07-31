@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnug0gum76eij"]
+
+[ext_resource type="Texture2D" uid="uid://bu0xoomg1vhp" path="res://assets/bg.png" id="1_anprf"]
+
+[node name="Bg" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(0, 80)
+autoscroll = Vector2(0, -10)
+
+[node name="Bg" type="Sprite2D" parent="Parallax2D"]
+texture_filter = 1
+position = Vector2(48, 54)
+texture = ExtResource("1_anprf")

@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://kfog0whjxced"]
+
+[ext_resource type="Script" uid="uid://blo3o0jm4k5gi" path="res://Scripts/ui.gd" id="1_57d6q"]
+[ext_resource type="Script" uid="uid://cbj4xcrbp7wlj" path="res://Scripts/Character_text.gd" id="1_gxpvq"]
+[ext_resource type="Script" uid="uid://bwltsfyori0aq" path="res://Scripts/start_menu.gd" id="3_8p5yr"]
+
+[node name="Ui" type="CanvasLayer"]
+process_mode = 3
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
+script = ExtResource("1_57d6q")
+
+[node name="Character_text" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gxpvq")
+
+[node name="Panel" type="Panel" parent="Character_text"]
+visible = false
+layout_mode = 2
+offset_left = 14.0
+offset_top = 112.0
+offset_right = 264.0
+offset_bottom = 152.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Character_text/Panel"]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Character_text/Panel/PanelContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Character_text/Panel/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "name:"
+
+[node name="Text" type="Label" parent="Character_text/Panel/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/line_spacing = -6
+autowrap_mode = 3
+
+[node name="Ender" type="Label" parent="Character_text/Panel/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "v"
+
+[node name="Start_Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_8p5yr")
+
+[node name="Panel" type="Panel" parent="Start_Menu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Start_Menu/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Start_Menu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[connection signal="end_dialog" from="Character_text" to="." method="_on_character_text_end_dialog"]
+[connection signal="pressed" from="Start_Menu/Panel/VBoxContainer/Button" to="Start_Menu" method="_on_button_pressed"]
