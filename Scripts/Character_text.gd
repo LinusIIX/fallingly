@@ -13,12 +13,12 @@ signal end_dialog
 	#set_dialog("walter",["lol","thats not nice","Jikes forever!"])
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_accept") && running:
+	if (Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("left_click") ) && running:
 		if tween:
 			tween.kill()
 		text_box.visible_ratio = 1
 		stop_it()
-	elif Input.is_action_just_pressed("ui_accept") && !running:
+	elif (Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("left_click")) && !running:
 		
 		ender.visible = false
 		if !textqueue.is_empty():

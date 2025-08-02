@@ -20,4 +20,4 @@ func _process(delta: float) -> void:
 		Ui.set_dialog(dialogname,dialog)
 		Globals.holding = "hammer"
 		Ui.set_holder("HAMMER")
-		self.queue_free()
+		self.visible = false

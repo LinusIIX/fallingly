@@ -1,5 +1,5 @@
 extends Area2D
-var speed = 10
+var speed = 20
 @export var dialogname = ""
 @export var dialog: Array[String] = [""]
 
@@ -20,4 +20,10 @@ func _process(delta: float) -> void:
 		Ui.set_dialog(dialogname,dialog)
 		Globals.holding = "cassete"
 		Ui.set_holder("CASSETE")
-		self.queue_free()
+		self.visible = false
+	if Globals.holding != "cassete":
+		self.visible = true
+	
+	if self.position.y < -10:
+		self.position.y += 100
+		$Cassete.rotation += randf_range(-10.0, 10.0)

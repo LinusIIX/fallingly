@@ -1,5 +1,5 @@
 extends Area2D
-var speed = 10
+var speed = 15
 @export var dialogname = ""
 @export var dialog: Array[String] = [""]
 
@@ -20,4 +20,11 @@ func _process(delta: float) -> void:
 		Ui.set_dialog(dialogname,dialog)
 		Globals.holding = "pan"
 		Ui.set_holder("PAN")
-		self.queue_free()
+		self.visible = false
+		
+	if Globals.holding != "pan":
+		self.visible = true
+	
+	if self.position.y < -10:
+		self.position.y += 100
+		$Pan.rotation += randf_range(-10.0, 10.0)

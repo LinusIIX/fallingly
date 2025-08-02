@@ -20,11 +20,12 @@ func _process(delta: float) -> void:
 		if !interacted:
 			interacted = true
 			Ui.set_dialog(dialogname,dialog)
-		else:
+		elif !Globals.cards["Spade"]:
 			Ui.set_dialog("Skull",["Have you seen my crown around?"])
+		else:
+			Ui.set_dialog("Skull",["I wish you the best of luck."])
 		if Globals.holding == "crown" && !Globals.cards["Spade"]:
 			$Skull.frame = 1
 			Ui.set_dialog("Skull",["He He He","Thank you so much!","Here you go..."])
-			Ui.set_dialog("",["The skull opens it jaw reveling the Ace of Spades"])
+			Ui.set_dialog("",["The skull opens it jaw reveling the Ace of Spades."])
 			Globals.cards["Spade"] = true
-			self.queue_free()

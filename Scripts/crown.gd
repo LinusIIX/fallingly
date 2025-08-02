@@ -20,4 +20,4 @@ func _process(delta: float) -> void:
 		Ui.set_dialog(dialogname,dialog)
 		Globals.holding = "crown"
 		Ui.set_holder("CROWN")
-		self.queue_free()
+		self.visible = false
