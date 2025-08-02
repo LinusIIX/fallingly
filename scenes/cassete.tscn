@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://w7n6pcbks5so"]
+
+[ext_resource type="Texture2D" uid="uid://b4nr5j2pobjqc" path="res://assets/cassete.png" id="1_7ym80"]
+[ext_resource type="Script" uid="uid://b25v1il050d5p" path="res://Scripts/cassete.gd" id="1_b4vnt"]
+[ext_resource type="Texture2D" uid="uid://350l2oy4jnen" path="res://assets/speedlines.png" id="2_u3ycl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ym80"]
+size = Vector2(12, 10)
+
+[sub_resource type="Animation" id="Animation_b4vnt"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Speedlines:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_u3ycl"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Speedlines:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333, 0.666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wvq73"]
+_data = {
+&"RESET": SubResource("Animation_b4vnt"),
+&"idle": SubResource("Animation_u3ycl")
+}
+
+[node name="Cassete" type="Area2D"]
+script = ExtResource("1_b4vnt")
+dialog = Array[String](["It's a videocassete.", "It has \"name forgotten\" written on it", "I'll take it for now."])
+
+[node name="Cassete" type="Sprite2D" parent="."]
+texture = ExtResource("1_7ym80")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7ym80")
+
+[node name="Speedlines" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("2_u3ycl")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wvq73")
+}
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

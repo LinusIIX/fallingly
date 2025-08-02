@@ -47,6 +47,8 @@ func stop_it():
 
 func set_dialog(char_name,text_array):
 	name_label.text = char_name + ":"
+	if char_name == "":
+		name_label.text = char_name
 	$Panel.visible = true
 	for texts in text_array:
 		textqueue.append(texts)

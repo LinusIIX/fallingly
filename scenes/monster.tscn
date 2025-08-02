@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdwk47lhx48gd"]
+
+[ext_resource type="Script" uid="uid://1u8bnqitbj3h" path="res://Scripts/monster.gd" id="1_1cbnp"]
+[ext_resource type="Texture2D" uid="uid://cg1gfl5byavrq" path="res://assets/monster.png" id="1_uwnm8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwnm8"]
+size = Vector2(37, 24)
+
+[node name="Monster" type="Area2D"]
+script = ExtResource("1_1cbnp")
+dialogname = "???"
+dialog = Array[String](["It seems you have gotten yourself in some trouble.", "You see if run into some myself.", "Why dont you help me a bit and in turn I'll help you out of this mess.", "I've lost the Aces from my deck of cards, bring them to me."])
+
+[node name="Monster" type="Sprite2D" parent="."]
+texture = ExtResource("1_uwnm8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_uwnm8")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

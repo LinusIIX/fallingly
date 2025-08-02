@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://b64viq0j4hcqr"]
+
+[ext_resource type="Script" uid="uid://vxkqeio4mmut" path="res://Scripts/pig.gd" id="1_j740r"]
+[ext_resource type="Texture2D" uid="uid://b4hptwh3gmgbh" path="res://assets/piggy.png" id="1_sq5kf"]
+[ext_resource type="Texture2D" uid="uid://350l2oy4jnen" path="res://assets/speedlines.png" id="2_4a8uq"]
+
+[sub_resource type="Animation" id="Animation_j740r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Speedlines:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4a8uq"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.1665
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Speedlines:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1665, 0.333, 0.4995, 0.666, 0.8325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j740r"]
+_data = {
+&"RESET": SubResource("Animation_j740r"),
+&"idle": SubResource("Animation_4a8uq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4a8uq"]
+size = Vector2(8, 8)
+
+[node name="pig" type="Area2D"]
+script = ExtResource("1_j740r")
+dialog = Array[String](["A porcelain pig", "It does'nt feel like there are coins in there."])
+
+[node name="Piggy" type="Sprite2D" parent="."]
+texture = ExtResource("1_sq5kf")
+
+[node name="Speedlines" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("2_4a8uq")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_j740r")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4a8uq")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

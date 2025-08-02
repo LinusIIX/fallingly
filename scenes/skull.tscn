@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://clt2tf0267svy"]
+
+[ext_resource type="Texture2D" uid="uid://dsos6m1lcyvbv" path="res://assets/skull.png" id="1_1bx6h"]
+[ext_resource type="Script" uid="uid://dgq8g4q2now50" path="res://Scripts/skull.gd" id="1_pa1hf"]
+[ext_resource type="Texture2D" uid="uid://350l2oy4jnen" path="res://assets/speedlines.png" id="2_sco77"]
+
+[sub_resource type="Animation" id="Animation_sco77"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Speedlines:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pa1hf"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.1665
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Speedlines:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1665, 0.333, 0.4995, 0.666, 0.8325, 0.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6mw1b"]
+_data = {
+&"RESET": SubResource("Animation_sco77"),
+&"idle": SubResource("Animation_pa1hf")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pa1hf"]
+size = Vector2(10, 12)
+
+[node name="skull" type="Area2D"]
+script = ExtResource("1_pa1hf")
+dialogname = "Skull"
+dialog = Array[String](["Hello", "Haven't seen a new face in quite a while.", "How did you get in here?", "Don't tell this to him but I stole one of the Aces.", "If you bring me my Crown that I lost I'll let you have it.", "You might be able to get some use out of it."])
+
+[node name="Skull" type="Sprite2D" parent="."]
+texture = ExtResource("1_1bx6h")
+hframes = 2
+
+[node name="Speedlines" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+texture = ExtResource("2_sco77")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6mw1b")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_pa1hf")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

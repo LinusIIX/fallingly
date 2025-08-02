@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bv0afold6cgwg"]
+[gd_scene load_steps=5 format=3 uid="uid://bv0afold6cgwg"]
 
 [ext_resource type="PackedScene" uid="uid://cnug0gum76eij" path="res://scenes/bg.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://bviggemt3dsqc" path="res://scenes/player.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://bdwk47lhx48gd" path="res://scenes/monster.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://w7n6pcbks5so" path="res://scenes/cassete.tscn" id="4_jyhfs"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -9,3 +11,13 @@
 
 [node name="Player" parent="." instance=ExtResource("2_0wfyh")]
 position = Vector2(78, 35)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(48, 32)
+zoom = Vector2(6.25, 6.25)
+
+[node name="Monster" parent="." instance=ExtResource("3_sugp2")]
+position = Vector2(29, 19)
+
+[node name="Cassete" parent="." instance=ExtResource("4_jyhfs")]
+position = Vector2(40, 56)

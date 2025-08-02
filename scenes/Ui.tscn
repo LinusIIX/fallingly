@@ -6,8 +6,6 @@
 
 [node name="Ui" type="CanvasLayer"]
 process_mode = 3
-scale = Vector2(0.5, 0.5)
-transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
 script = ExtResource("1_57d6q")
 
 [node name="Character_text" type="Control" parent="."]
@@ -20,15 +18,18 @@ script = ExtResource("1_gxpvq")
 [node name="Panel" type="Panel" parent="Character_text"]
 visible = false
 layout_mode = 2
-offset_left = 14.0
-offset_top = 112.0
-offset_right = 264.0
-offset_bottom = 152.0
+offset_left = 88.0
+offset_top = 271.0
+offset_right = 513.0
+offset_bottom = 355.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Character_text/Panel"]
-layout_mode = 0
-offset_right = 250.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Character_text/Panel/PanelContainer"]
 layout_mode = 2
@@ -66,8 +67,10 @@ script = ExtResource("3_8p5yr")
 
 [node name="Panel" type="Panel" parent="Start_Menu"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 269.0
+offset_top = -27.0
+offset_right = 316.0
+offset_bottom = 4.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Start_Menu/Panel"]
 layout_mode = 0
@@ -77,6 +80,26 @@ offset_bottom = 40.0
 [node name="Button" type="Button" parent="Start_Menu/Panel/VBoxContainer"]
 layout_mode = 2
 text = "Start"
+
+[node name="holder" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="holder"]
+layout_mode = 0
+offset_right = 178.0
+offset_bottom = 31.0
+
+[node name="Label" type="Label" parent="holder/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Holding:"
 
 [connection signal="end_dialog" from="Character_text" to="." method="_on_character_text_end_dialog"]
 [connection signal="pressed" from="Start_Menu/Panel/VBoxContainer/Button" to="Start_Menu" method="_on_button_pressed"]

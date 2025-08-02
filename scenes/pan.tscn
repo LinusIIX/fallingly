@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://dj00aas2iqvxq"]
+
+[ext_resource type="Texture2D" uid="uid://cgv0cka3x40hh" path="res://assets/Pan.png" id="1_siqbj"]
+[ext_resource type="Script" uid="uid://blti5mal3ebpg" path="res://Scripts/pan.gd" id="1_yxv2b"]
+[ext_resource type="Texture2D" uid="uid://350l2oy4jnen" path="res://assets/speedlines.png" id="2_bkvwt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_siqbj"]
+size = Vector2(16, 12)
+
+[sub_resource type="Animation" id="Animation_yxv2b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Speedlines:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bkvwt"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Speedlines:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333, 0.666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yxv2b"]
+_data = {
+&"RESET": SubResource("Animation_yxv2b"),
+&"idle": SubResource("Animation_bkvwt")
+}
+
+[node name="pan" type="Area2D"]
+script = ExtResource("1_yxv2b")
+dialog = Array[String](["It's a coated pan.", "I don't know how long I'll be here.", "I'll take it with me."])
+
+[node name="Pan" type="Sprite2D" parent="."]
+texture = ExtResource("1_siqbj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_siqbj")
+
+[node name="Speedlines" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("2_bkvwt")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yxv2b")
+}
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
